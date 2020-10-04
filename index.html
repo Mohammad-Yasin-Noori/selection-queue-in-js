@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4">
+					<label>Prioritize Technologies for Website Design:</label>
+					<select class="form-control" id="technologies" name="technologies">
+						<option value="Browsers">Browsers</option>
+						<option value="HTML">HTML</option>
+						<option value="CSS">CSS</option>
+						<option value="CSS Libraries">CSS Libraries</option>
+						<option value="JS Frameworks">JS Frameworks</option>
+					</select>
+				</div>
+				<div class="col-sm-4">
+					<button id="showBtn">Show List</button>
+					<p id="showList"></p>
+				</div>
+			</div>
+		</div>
+		<script>
+			$(document).ready(function(){
+				let values = [];
+				$('#technologies').change(function(){
+					//checking if the value is already seletected or not, if selected it will be removed
+					if($('option:selected', this).hasClass('text-success')){
+						var value = $(this).val();
+						//getting the index of the selected value
+						var index = values.indexOf(value);
+						console.log(index);
+						//checking if the value exists in the array
+						if(index != -1){
+							//removing the selected value
+							values.splice(index, 1);
+							console.log('deleting ' +value);
+						}
+						$('option:selected', this).removeClass('text-success');
+					}
+					//if not, it will be pushed to array
+					else {
+						$('option:selected', this).addClass('text-success');
+						//pushing to array
+						values.push($(this).val());
+						console.log('pushing ' +$(this).val());
+					}
+				});
+				$('#showBtn').click(function(){
+					console.log(values);
+					$('#showList').text(values);
+				});
+			});
+		</script>
+	</body>
+</html>
